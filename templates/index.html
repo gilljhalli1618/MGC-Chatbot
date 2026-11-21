@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mata Gujri College Chatbot</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         BACKGROUND VIDEO
+    ========================================== -->
+
+    <video class="background-video"
+           autoplay
+           muted
+           loop
+           playsinline>
+
+        <source
+            src="{{ url_for('static',
+                    filename='video/college.mp4') }}"
+            type="video/mp4">
+
+    </video>
+
+
+    <!-- DARK OVERLAY -->
+
+    <div class="video-overlay"></div>
+
+
+    <!-- =========================================
+         COLLEGE LOGO
+    ========================================== -->
+
+    <img
+        class="college-logo"
+        src="{{ url_for('static',
+                        filename='images/logo.png') }}"
+        alt="Mata Gujri College Logo">
+
+
+    <!-- =========================================
+         COLLEGE NAME
+    ========================================== -->
+
+    <div class="college-title">
+
+        <h1>
+            MATA GUJRI COLLEGE
+        </h1>
+
+        <p>
+            FATEHGARH SAHIB
+        </p>
+
+        <div class="welcome">
+
+            👋 Welcome to Mata Gujri College
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         CHATBOT
+    ========================================== -->
+
+    <div class="chatbot">
+
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+            <div class="bot-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>
+                    MGC Chatbot
+                </h2>
+
+                <span>
+                    College Information Assistant
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             CHAT MESSAGES
+        ====================================== -->
+
+        <div
+            class="chat-messages"
+            id="chatMessages">
+
+
+            <!-- First Message -->
+
+            <div class="message bot-message">
+
+                👋 Hello!
+
+                <br><br>
+
+                Welcome to
+                <strong>
+                    Mata Gujri College,
+                    Fatehgarh Sahib.
+                </strong>
+
+                <br><br>
+
+                I am your MGC College
+                Information Assistant. 🤖
+
+                <br><br>
+
+                How can I help you today? 😊
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================
+             QUICK BUTTONS
+        ====================================== -->
+
+        <div class="quick-buttons">
+
+            <button onclick="sendMessage('courses')">
+                🎓 Courses
+            </button>
+
+            <button onclick="sendMessage('admission')">
+                📝 Admission
+            </button>
+
+            <button onclick="sendMessage('fees')">
+                💰 Fees
+            </button>
+
+            <button onclick="sendMessage('scholarship')">
+                🎓 Scholarship
+            </button>
+
+            <button onclick="sendMessage('facilities')">
+                🏫 Facilities
+            </button>
+
+            <button onclick="sendMessage('placement')">
+                💼 Placement
+            </button>
+
+            <button onclick="sendMessage('departments')">
+                📸 Departments
+            </button>
+
+            <button onclick="sendMessage('contact')">
+                📞 Contact
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             INPUT
+        ====================================== -->
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Ask something about MGC..."
+                onkeydown="handleEnter(event)">
+
+
+            <button onclick="sendUserMessage()">
+                ➤
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================================
+         OFFICIAL WEBSITE BUTTON
+    ========================================== -->
+
+    <a
+        class="website-link"
+        href="https://matagujricollege.org/"
+        target="_blank">
+
+        🌐 Official MGC Website
+
+    </a>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+
+        // Add message to chat
+        function addMessage(message, type) {
+
+
+            const chatMessages =
+                document.getElementById("chatMessages");
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.classList.add("message");
+
+
+            if (type === "user") {
+
+                div.classList.add("user-message");
+
+            }
+
+            else {
+
+                div.classList.add("bot-message");
+
+            }
+
+
+            div.innerHTML = message;
+
+
+            chatMessages.appendChild(div);
+
+
+            chatMessages.scrollTop =
+                chatMessages.scrollHeight;
+
+        }
+
+
+
+        // Send message to Flask
+        function sendMessage(message) {
+
+
+            addMessage(
+                message,
+                "user"
+            );
+
+
+            fetch("/chat", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    message: message
+
+                })
+
+            })
+
+
+            .then(response =>
+                response.json()
+            )
+
+
+            .then(data => {
+
+                addMessage(
+                    data.reply,
+                    "bot"
+                );
+
+            })
+
+
+            .catch(error => {
+
+                console.log(error);
+
+                addMessage(
+                    "❌ Sorry! Something went wrong.",
+                    "bot"
+                );
+
+            });
+
+        }
+
+
+
+        // Send typed message
+        function sendUserMessage() {
+
+
+            const input =
+                document.getElementById(
+                    "userInput"
+                );
+
+
+            const message =
+                input.value.trim();
+
+
+            if (message === "") {
+
+                return;
+
+            }
+
+
+            sendMessage(message);
+
+
+            input.value = "";
+
+        }
+
+
+
+        // Enter key
+        function handleEnter(event) {
+
+
+            if (event.key === "Enter") {
+
+                sendUserMessage();
+
+            }
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
