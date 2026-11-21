@@ -1,0 +1,595 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding-top: 150px;
+}
+
+
+/* =========================================
+   BACKGROUND VIDEO
+========================================= */
+
+.background-video {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -2;
+}
+
+
+/* =========================================
+   DARK OVERLAY
+========================================= */
+
+.video-overlay {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    z-index: -1;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.college-logo {
+
+    position: fixed;
+
+    top: 25px;
+
+    left: 30px;
+
+    width: 80px;
+
+    height: 80px;
+
+    object-fit: contain;
+
+    background: white;
+
+    border-radius: 50%;
+
+    padding: 7px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.5);
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   COLLEGE TITLE
+========================================= */
+
+.college-title {
+
+    position: fixed;
+
+    top: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    text-align: center;
+
+    color: white;
+
+    z-index: 5;
+
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+
+.college-title h1 {
+
+    font-size: 32px;
+
+    letter-spacing: 3px;
+
+    font-weight: bold;
+}
+
+
+.college-title p {
+
+    margin-top: 6px;
+
+    font-size: 17px;
+
+    letter-spacing: 6px;
+}
+
+
+.welcome {
+
+    margin-top: 12px;
+
+    font-size: 18px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   CHATBOT
+========================================= */
+
+.chatbot {
+
+    width: 440px;
+
+    height: 610px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.55);
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   CHAT HEADER
+========================================= */
+
+.chat-header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #173b70,
+            #2d6ca8
+        );
+
+    color: white;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.bot-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    background: white;
+
+    color: #173b70;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 26px;
+
+    flex-shrink: 0;
+}
+
+
+.chat-header h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 4px;
+}
+
+
+.chat-header span {
+
+    font-size: 12px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================
+   CHAT MESSAGES
+========================================= */
+
+.chat-messages {
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+    padding: 20px;
+
+    overflow-y: auto;
+
+    background: #f4f7fb;
+}
+
+
+.message {
+
+    max-width: 82%;
+
+    padding: 12px 15px;
+
+    margin-bottom: 12px;
+
+    border-radius: 16px;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+
+    word-wrap: break-word;
+}
+
+
+.bot-message {
+
+    background: white;
+
+    color: #333;
+
+    border-bottom-left-radius: 5px;
+
+    margin-right: auto;
+
+    box-shadow:
+        0 2px 9px rgba(0, 0, 0, 0.08);
+}
+
+
+.user-message {
+
+    background: #2766a8;
+
+    color: white;
+
+    border-bottom-right-radius: 5px;
+
+    margin-left: auto;
+}
+
+
+/* =========================================
+   QUICK BUTTONS
+========================================= */
+
+.quick-buttons {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    padding: 12px 15px;
+
+    background: white;
+
+    border-top: 1px solid #e5e5e5e;
+    flex-shrink: 0;
+}
+
+
+.quick-buttons button {
+
+    border: 1px solid #2766a8;
+
+    background: white;
+
+    color: #2766a8;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    transition: 0.2s;
+}
+
+
+.quick-buttons button:hover {
+
+    background: #2766a8;
+
+    color: white;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.chat-input {
+
+    display: flex;
+
+    padding: 13px;
+
+    background: white;
+
+    border-top: 1px solid #dddddd;
+
+    gap: 10px;
+}
+
+
+.chat-input input {
+
+    flex: 1;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 25px;
+
+    padding: 12px 16px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.chat-input input:focus {
+
+    border-color: #2766a8;
+}
+
+
+.chat-input button {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #2766a8;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.chat-input button:hover {
+
+    background: #173b70;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   OFFICIAL WEBSITE BUTTON
+========================================= */
+
+.website-link {
+
+    position: fixed;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: white;
+
+    color: #173b70;
+
+    text-decoration: none;
+
+    padding: 9px 18px;
+
+    border-radius: 25px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.35);
+
+    z-index: 10;
+}
+
+
+.website-link:hover {
+
+    background: #173b70;
+
+    color: white;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+
+    body {
+
+        padding-top: 125px;
+
+        padding-bottom: 60px;
+    }
+
+
+    .college-logo {
+
+        width: 60px;
+
+        height: 60px;
+
+        top: 15px;
+
+        left: 15px;
+    }
+
+
+    .college-title {
+
+        top: 18px;
+    }
+
+
+    .college-title h1 {
+
+        font-size: 18px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .college-title p {
+
+        font-size: 10px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .welcome {
+
+        font-size: 13px;
+
+        margin-top: 7px;
+    }
+
+
+    .chatbot {
+
+        width: 94vw;
+
+        height: 68vh;
+
+        min-height: 500px;
+    }
+
+
+    .website-link {
+
+        bottom: 10px;
+
+        font-size: 11px;
+
+        padding: 8px 14px;
+    }
+
+}
+.chat-input {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 70px !important;
+    min-height: 70px !important;
+    padding: 12px 15px !important;
+    background: white !important;
+    border-top: 1px solid #ddd !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 20 !important;
+}
+.chat-input input{
+    display: block !important;
+    visibility:  visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: 45px !important;
+    min-height: 45px !important;
+    flex: 1 1 auto !important;
+    padding: 12px 17px !important;
+    border: 1px solid #d4dce5 !important;
+    border-radius: 25px !important;
+    background: #f8fafc !important;
+    color: #222 !important;
+    font-size: 14px !important;
+}
+.chat-input button{
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 45px !important;
+    height: 45px !important;
+    flex: 0 0 45px !important;
+    border: non !important;
+    border-radius: 50% !important;
+    background: #145da0 !important;
+    color: white !important;
+    font-size: 20px !important;
+}
